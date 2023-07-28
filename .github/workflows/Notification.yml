@@ -5,7 +5,7 @@ on:
     types: [opened, closed, reopened]
     branches:
       - main
- 
+
 jobs:
   send_message:
     runs-on: ubuntu-latest
@@ -16,8 +16,8 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-           🤖**Comtrade Backend Review Request!**.
-           **Event Action:** ${{ github.event.action }}
-           **PR Title: **${{ github.event.pull_request.title }}
-           **PR Link:** ${{ github.event.pull_request.html_url }}
-           **PR Author:** ${{ github.event.pull_request.user.login}}
+            🤖 <b>Comtrade Backend Review Request!</b>.
+            <b>Event Action:</b> ${{ github.event.action }}
+            <b>PR Title:</b> ${{ github.event.pull_request.title }}
+            <b>PR Link:</b> ${{ github.event.pull_request.html_url }}
+            <b>PR Author:</b> ${{ github.event.pull_request.user.login}}
