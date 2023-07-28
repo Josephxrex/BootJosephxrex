@@ -5,12 +5,7 @@ on:
     types: [opened, closed, reopened]
     branches:
       - main
-  pull_request_review:
-    types: [submitted]
-
-  pull_request_review_comment:
-    types: [created]
-
+ 
 jobs:
   send_message:
     runs-on: ubuntu-latest
