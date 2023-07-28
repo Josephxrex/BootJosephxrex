@@ -17,8 +17,9 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             🤖Comtrade Backend Review Request!🤖
-            
+
             Event Action:${{ github.event.action }}
             PR Title: ${{ github.event.pull_request.title }}
             PR Author: ${{ github.event.pull_request.user.login}}
+            PR Label: ${{ github.event.pull_request.labels.name }}
             PR Link: ${{ github.event.pull_request.html_url }}
