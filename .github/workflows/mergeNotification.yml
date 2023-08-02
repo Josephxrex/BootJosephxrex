@@ -1,0 +1,20 @@
+name: Merge Notification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  notify-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            <b>🤖Comtrade Backend PR Merged!</b>
+            <b>Commit Message:</b> ${{github.event.head_commit.message}}
+          format: html
