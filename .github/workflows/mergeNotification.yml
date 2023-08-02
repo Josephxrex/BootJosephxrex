@@ -16,5 +16,6 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             <b>🤖Comtrade Backend PR Merged!</b>
+            
             <b>Commit Message:</b> ${{github.event.head_commit.message}}
           format: html
