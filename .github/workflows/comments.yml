@@ -9,36 +9,13 @@ jobs:
   send_notification:
     runs-on: ubuntu-latest
     steps:
-      - name: Check PR review state
-        id: check_review_state
-        run: echo "::set-output name=state::${{ github.event.review.state }}"
-      - name: Send Telegram notification
-        if: ${{ steps.check_review_state.outputs.state == 'commented' }}
+      - name: Send Telegram notification on PR review submitted comment
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
+            github.event.review.state 
             <b>🤖Comtrade Backend PR Reviewed!</b>
             <b>${{ github.event.review.user.login }}</b> has reviewed the PR ${{ github.event.pull_request.html_url }}
-          format: html
-      - name: Send Telegram notification
-        if: ${{ steps.check_review_state.outputs.state == 'approved' }}
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            <b>🤖Comtrade Backend PR Reviewed and approved!</b>
-            <b>${{ github.event.review.user.login }}</b> has reviewed and approved the PR ${{ github.event.pull_request.html_url }}
-          format: html
-      - name: Send Telegram notification
-        if: ${{ steps.check_review_state.outputs.state == 'changes_requested' }}
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            <b>🤖Comtrade Backend PR Revised but needs changes!!</b>
-            <b>${{ github.event.review.user.login }}</b> has reviewed the PR, but it needs changes before the merge. ${{ github.event.pull_request.html_url }}
           format: html
