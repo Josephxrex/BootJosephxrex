@@ -1,4 +1,4 @@
-name: ComentGeneral
+name: CommentGeneral
 
 on:
   pull_request_review:
@@ -6,16 +6,17 @@ on:
       - submitted
 
 jobs:
-  send_notification:
+   approved:
+    if: github.event.review.state == 'commented'
     runs-on: ubuntu-latest
     steps:
       - name: Send Telegram notification on PR review submitted
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_TO}}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
-            <b>🤖Comtrade Backend PR Reviewed!</b>
+            <b>🤖Comtrade Backend PR Reviewed Commented!</b>
 
             ${{ github.event.review.user.login }} has reviewed the PR ${{ github.event.pull_request.title }}
           format: html
