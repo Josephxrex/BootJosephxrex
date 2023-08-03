@@ -2,10 +2,8 @@ name: Telegram Notification
 
 on:
   pull_request:
-    types: [opened, closed, reopened]
-    branches:
-      - main
-
+    types:
+      - review_requested
 jobs:
   send_message:
     runs-on: ubuntu-latest
@@ -16,11 +14,12 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            🤖Comtrade Backend Review Request!🤖
+            <b>🤖Comtrade Backend Review Request!!🤖</b>
 
-            Event Action:${{ github.event.action }}
-            PR Title: ${{ github.event.pull_request.title }}
-            PR Author: ${{ github.event.pull_request.user.login}}
-            🤖 Requested Reviewers: 
-            ${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}
-            PR Link: ${{ github.event.pull_request.html_url }}
+            <b>PR Author:</b> ${{ github.event.pull_request.user.login}}
+            <b>PR Title:</b> ${{ github.event.pull_request.title }}
+            🤖<b>Requested Reviewers:</b>
+              ${{github.event.requested_reviewer.login }}
+            <b>PR Link:</b> ${{ github.event.pull_request.html_url }}
+          format: html
+
