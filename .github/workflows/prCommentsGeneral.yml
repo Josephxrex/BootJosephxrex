@@ -1,4 +1,4 @@
-name: Notify on PR submitted reviews
+name: ComentGeneral
 
 on:
   pull_request_review:
