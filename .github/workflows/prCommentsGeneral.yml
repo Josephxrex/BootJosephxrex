@@ -13,10 +13,10 @@ jobs:
       - name: Send Telegram notification on PR review submitted
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            <b>🤖Comtrade Backend PR Reviewed Commented!</b>
+            <b>🤖Comtrade Backend PR Reviewed and Commented!</b>
 
-            ${{ github.event.review.user.login }} has reviewed the PR ${{ github.event.pull_request.title }}
+            <b>${{ github.event.review.user.login }}</b> has reviewed the PR ${{ github.event.pull_request.title }}
           format: html
