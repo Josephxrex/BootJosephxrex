@@ -1,9 +1,11 @@
-name: Telegram Notification
+name: PR Notification
 
 on:
   pull_request:
     types:
       - review_requested
+      - ready_for_review
+
 jobs:
   send_message:
     runs-on: ubuntu-latest
@@ -18,8 +20,7 @@ jobs:
 
             <b>PR Author:</b> ${{ github.event.pull_request.user.login}}
             <b>PR Title:</b> ${{ github.event.pull_request.title }}
-            🤖<b>Requested Reviewers:</b>
+            <b>Requested Reviewers:</b>
               ${{github.event.requested_reviewer.login }}
             <b>PR Link:</b> ${{ github.event.pull_request.html_url }}
           format: html
-
