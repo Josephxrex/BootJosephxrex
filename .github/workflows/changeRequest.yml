@@ -16,7 +16,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            <b>🤖Comtrade Backend PR Reviewed but Changes equested!</b>
+            <b>🤖Comtrade Backend PR Reviewed but Changes Requested!</b>
 
-            ${{ github.event.review.user.login }} has reviewed the PR ${{ github.event.pull_request.title }}
+            <b> ${{ github.event.review.user.login }}</b> has reviewed the PR ${{ github.event.pull_request.title }}
           format: html
