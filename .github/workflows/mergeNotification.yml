@@ -20,4 +20,5 @@ jobs:
             Commit Message: ${{github.event.head_commit.message}}
 
             <b>Sync your branches!</b>
+            "message_thread_id":"2",
           format: html
