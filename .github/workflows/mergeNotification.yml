@@ -18,7 +18,7 @@ jobs:
           message: |
             <b>🤖Comtrade Backend PR Merged!</b>
 
-            <b>Title:</b> ${{github.event.pull_request.title}}
+            <b>Title:</b> ${{github.event.head_commit.title}}
 
             <b>Sync your branches!</b>
           format: html
