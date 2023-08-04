@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   notify-merge:
     runs-on: ubuntu-latest
@@ -17,8 +18,7 @@ jobs:
           message: |
             <b>🤖Comtrade Backend PR Merged!</b>
 
-            Commit Message: ${{github.event.head_commit.message}}
+            <b>Title:</b> ${{github.event.pull_request.title}}
 
             <b>Sync your branches!</b>
-            "message_thread_id":"2",
           format: html
