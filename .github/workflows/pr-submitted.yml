@@ -20,6 +20,7 @@ jobs:
 
             <b>${{ github.event.review.user.login }}</b> has approved the PR:  ${{ github.event.pull_request.html_url }}
           format: html
+          thread_id: ${{ secrets.INPUT_THREAD_ID }}
   commented:
     if: github.event.review.state == 'commented'
     runs-on: ubuntu-latest
