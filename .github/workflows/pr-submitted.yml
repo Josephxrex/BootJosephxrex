@@ -13,7 +13,8 @@ jobs:
       - name: Send Telegram notification on PR review submitted comment
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_TO }}/2
+          to: ${{ secrets.TELEGRAM_TO }}
+          thread_id: ${{ secrets.TELEGRAM_thread }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             <b>🤖Comtrade Backend PR approved</b>
