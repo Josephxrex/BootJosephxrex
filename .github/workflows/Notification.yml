@@ -24,3 +24,4 @@ jobs:
               ${{github.event.requested_reviewer.login }}
             <b>PR Link:</b> ${{ github.event.pull_request.html_url }}
           format: html
+          thread_id: ${{ secrets.INPUT_THREAD_ID }}
