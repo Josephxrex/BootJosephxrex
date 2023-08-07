@@ -1,4 +1,4 @@
-name: PYNOTIFICATION
+name: PR Notification
 
 on:
   pull_request:
@@ -9,6 +9,9 @@ jobs:
   send_notification:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -18,10 +21,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install python-telegram-bot
-          pip install requests
+
+      - name: Install Requests Module
+        run: python -m pip install requests
 
       - name: Send Notification to Telegram
         run: |
+          cd path/to/script
           python send_notification.py
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
@@ -29,4 +35,3 @@ jobs:
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
           GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
           GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
-          PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
