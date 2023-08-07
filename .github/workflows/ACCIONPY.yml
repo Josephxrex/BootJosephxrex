@@ -21,6 +21,7 @@ jobs:
 
       - name: Send Notification to Telegram
         run: |
+          cd path/to/script
           python send_notification.py
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
