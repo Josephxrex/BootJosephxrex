@@ -19,7 +19,7 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install axios
 
       - name: Send Telegram Notification
         run: node send_notification.ts
