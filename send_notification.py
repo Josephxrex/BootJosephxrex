@@ -11,14 +11,14 @@ def main():
     pr_url = f"{github_server_url}/{github_repository}/pull"
     message = f"Nueva Pull Request abierta: {pr_url}"
 
-    send_message(bot_token, chat_id, message)
+    send_message(bot_token, chat_id, message, message_thread_id)
 
-def send_message(bot_token, chat_id, text):
+def send_message(bot_token, chat_id, text, message_thread_id):
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     payload = {
         "chat_id": chat_id,
         "text": text,
-        "message_thread_id" : message_thread_id,
+        "message_thread_id": message_thread_id,
         "parse_mode": "HTML"
     }
     response = requests.post(url, json=payload)
