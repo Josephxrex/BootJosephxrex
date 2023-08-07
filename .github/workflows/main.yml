@@ -1,4 +1,4 @@
-name: PR TS
+name: PR REVIEW
 
 on:
   pull_request:
@@ -24,6 +24,7 @@ jobs:
       - name: Send Telegram Notification
         run: node send_notification.ts
         env:
+          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend Review Request!!🤖<b><br><b>PR Author:</b> ${{ github.event.pull_request.user.login}}<br><b>PR Title:</b> ${{ github.event.pull_request.title }}<br> <b>Requested Reviewers:</b> ${{github.event.requested_reviewer.login }}<b>PR Link:</b> ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
