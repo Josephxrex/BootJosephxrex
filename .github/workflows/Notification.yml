@@ -23,5 +23,8 @@ jobs:
             <b>Requested Reviewers:</b>
               ${{github.event.requested_reviewer.login }}
             <b>PR Link:</b> ${{ github.event.pull_request.html_url }}
-          format: html
-          thread_id: ${{ secrets.INPUT_THREAD_ID }}
+          reply_to_message_id: ${{ steps.set_message_id.outputs.message_id }}
+          chat_id: ${{ secrets.TELEGRAM_THREAD_ID }}
+      
+      - id: set_message_id
+        run: echo "::set-output name=message_id::${{ steps.send_message.outputs.message_id }}"
