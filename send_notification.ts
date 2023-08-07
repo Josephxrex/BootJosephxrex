@@ -3,7 +3,7 @@ const axios = require('axios');
 async function sendTelegramNotification() {
   const botToken = process.env.TELEGRAM_TOKEN;
   const chatId = process.env.TELEGRAM_TO;
-  const message= process.env.TELEGRAM_TO;
+  const message= process.env.TELEGRAM_MESSAGE;
   const messageThreadId = process.env.TELEGRAM_THREAD_ID;
   const githubServerUrl = process.env.GITHUB_SERVER_URL;
   const githubRepository = process.env.GITHUB_REPOSITORY;
