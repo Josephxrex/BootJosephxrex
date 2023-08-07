@@ -6,8 +6,9 @@ async function sendTelegramNotification() {
   const messageThreadId = process.env.TELEGRAM_THREAD_ID;
   const githubServerUrl = process.env.GITHUB_SERVER_URL;
   const githubRepository = process.env.GITHUB_REPOSITORY;
-
-  const prUrl = `${githubServerUrl}/${githubRepository}/pull`;
+  const pullRequestNumber = process.env.PULL_REQUEST_NUMBER;
+   
+  const prUrl = `${githubServerUrl}/${githubRepository}/pull/${pullRequestNumber}`;
   const message = `Nueva Pull Request abierta: ${prUrl}`;
 
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
