@@ -21,8 +21,8 @@ jobs:
       - name: Install Dependencies
         run: npm install axios
 
-      - name: Send Telegram notification on PR review approved
-        run: node send_telegram_notification.ts
+      - name: Send Telegram Notification
+        run: node send_notification.ts
         env:
           TELEGRAM_MESSAGE: "🤖Comtrade Backend PR approved\n\n${{ github.event.review.user.login }} has approved the PR:  ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
