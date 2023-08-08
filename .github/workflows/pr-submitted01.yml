@@ -76,7 +76,7 @@ jobs:
       - name: Send Telegram notification on PR review changes requested
         run: node .github/comtrade-bot/send_notification.ts
         env:
-          ACTION: CHANGES_REQUESTED
+          ACTION: CHANGES
           REVIEW_USER: ${{ github.event.review.user.login }}
           PR_URL: ${{ github.event.pull_request.html_url }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
