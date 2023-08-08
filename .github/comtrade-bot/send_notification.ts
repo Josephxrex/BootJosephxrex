@@ -21,13 +21,15 @@ async function sendTelegramNotification() {
 
   try {
     const response = await axios.post(url, payload);
-    if (response.status === 200) {
-      console.log('Mensaje enviado con éxito');
-    } else {
-      console.error('Error al enviar el mensaje:', response.data);
-    }
+    if (response.status !== 200) {
+      throw new Error(`Telegram API error: ${response.statusText}`);
+    } 
   } catch (error) {
-    console.error('Error al enviar el mensaje:', error.message);
+    const err = error as Error;
+    console.error(
+      `An error occurred while sending the Telegram message: ${err}`
+    );
+    throw err;
   }
 }
 
