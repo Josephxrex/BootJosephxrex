@@ -25,11 +25,11 @@ jobs:
         run: node send_notification.ts
         env:
           TELEGRAM_MESSAGE: |
-            **🤖Comtrade Backend Review Request🤖**
+            **🤖Comtrade Backend Review Request🤖!**
             **PR Author:** ${{ github.event.pull_request.user.login}}
             **PR Title:** ${{ github.event.pull_request.title}}
             **Requested Reviewers:**
-             ${{github.event.requested_reviewer.login }}
+            **${{github.event.requested_reviewer.login}}**
             **PR Link:** ${{ github.event.pull_request.html_url }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
