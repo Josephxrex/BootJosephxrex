@@ -24,7 +24,9 @@ jobs:
       - name: Send Telegram Notification
         run: node .github/comtrade-bot/send_notification.ts
         env:
-          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR approved</b>${{ github.event.review.user.login }} has approved the PR:  ${{ github.event.pull_request.html_url }}"
+          TELEGRAM_MESSAGE:  | 
+            "**🤖Comtrade Backend PR approved**
+            **${{ github.event.review.user.login }}** has approved the PR:  ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
@@ -49,7 +51,9 @@ jobs:
       - name: Send Telegram notification on PR review commented
         run: node .github/comtrade-bot/send_notification.ts
         env:
-          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR commented!</b><p>${{ github.event.review.user.login }} has commented on the PR:   ${{ github.event.pull_request.html_url }}</p>"
+          TELEGRAM_MESSAGE: | 
+            **🤖Comtrade Backend PR commented!**
+            **${{ github.event.review.user.login }}** has commented on the PR:   ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
@@ -74,7 +78,9 @@ jobs:
       - name: Send Telegram notification on PR review changes requested
         run: node .github/comtrade-bot/send_notification.ts
         env:
-          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR changes requested!!</b><p>${{ github.event.review.user.login }} requested changes on the PR:  ${{ github.event.pull_request.html_url }}<p>"
+          TELEGRAM_MESSAGE: |
+            **🤖Comtrade Backend PR changes requested!!
+            **${{ github.event.review.user.login }}** requested changes on the PR:  ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
