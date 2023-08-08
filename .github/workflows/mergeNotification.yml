@@ -23,12 +23,9 @@ jobs:
       - name: Send Telegram Notification
         run: node .github/comtrade-bot/send_notification.ts
         env:
-          TELEGRAM_MESSAGE: | 
-            **🤖Comtrade Backend PR Merged!**
-            **Title:** ${{github.event.head_commit.message}}
-            **Sync your branches!**
+          ACTION: MERGE
+          COMMIT_MESSAGE: ${{github.event.head_commit.message}}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
-          GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
