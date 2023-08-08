@@ -8,15 +8,26 @@ jobs:
   notify-merge:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Notification
-        uses: appleboy/telegram-action@master
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            <b>🤖Comtrade Backend PR Merged!</b>
+          node-version: 14
 
-            <b>Title:</b> ${{github.event.pull_request.title}}
+      - name: Install Dependencies
+        run: npm install axios
 
-            <b>Sync your branches!</b>
-          format: html
+      - name: Send Telegram Notification
+        run: node send_notification.ts
+        env:
+          TELEGRAM_MESSAGE: | 
+            **🤖Comtrade Backend PR Merged!**
+            **Title:** ${{github.event.pull_request.title}}
+            **Sync your branches!**
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+          TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+          GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
+          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
