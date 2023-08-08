@@ -42,7 +42,7 @@ function constructMessage() {
       break;
     case "COMMENTED":
       message = `
-<b>🤖${repo} PR commented!</b><br>
+<b>🤖${repo} PR commented!</b>
 
 <b>${reviewUser}</b> has commented on the PR: ${prUrl}`;
       break;
