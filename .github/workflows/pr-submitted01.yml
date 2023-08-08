@@ -22,7 +22,7 @@ jobs:
         run: npm install axios
 
       - name: Send Telegram Notification
-        run: node BootJosephxrex/.github/comtrade-bot/send_notification.ts
+        run: node .github/comtrade-bot/send_notification.ts
         env:
           TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR approved</b>${{ github.event.review.user.login }} has approved the PR:  ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
@@ -47,7 +47,7 @@ jobs:
         run: npm install axios
 
       - name: Send Telegram notification on PR review commented
-        run: node BootJosephxrex/.github/comtrade-bot/send_notification.ts
+        run: node .github/comtrade-bot/send_notification.ts
         env:
           TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR commented!</b><p>${{ github.event.review.user.login }} has commented on the PR:   ${{ github.event.pull_request.html_url }}</p>"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
@@ -72,7 +72,7 @@ jobs:
         run: npm install axios
 
       - name: Send Telegram notification on PR review changes requested
-        run: node BootJosephxrex/.github/comtrade-bot/send_notification.ts
+        run: node .github/comtrade-bot/send_notification.ts
         env:
           TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR changes requested!!</b><p>${{ github.event.review.user.login }} requested changes on the PR:  ${{ github.event.pull_request.html_url }}<p>"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
