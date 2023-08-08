@@ -27,7 +27,7 @@ function constructMessage() {
       break;
     case "PR_READY":
       message = `
-<b>🤖${repo}Review Request</b>
+<b>🤖${repo} Review Request</b>
 
 <b>PR Link:</b> ${prUrl}
 <b>PR Title:</b> ${prTitle}
