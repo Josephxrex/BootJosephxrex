@@ -9,7 +9,7 @@ enum ACTIONS {
 }
 
 // Repository secret
-const repo = process.env.GITHUB_REPOSITORY;
+const repo = process.env.REPOSITORY_NAME;
 const botToken = process.env.TELEGRAM_TOKEN;
 const chatId = process.env.TELEGRAM_TO;
 const messageThreadId = process.env.TELEGRAM_THREAD_ID;
