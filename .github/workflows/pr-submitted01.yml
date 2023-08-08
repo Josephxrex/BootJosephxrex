@@ -24,9 +24,12 @@ jobs:
       - name: Send Telegram Notification
         run: node send_notification.ts
         env:
-          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR approved</b><p>${{ github.event.review.user.login }} has approved the PR:  ${{ github.event.pull_request.html_url }}</p>"
+          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR approved</b>${{ github.event.review.user.login }} has approved the PR:  ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+          TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+          GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
+          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
 
   commented:
     if: github.event.review.state == 'commented'
@@ -49,6 +52,9 @@ jobs:
           TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR commented!</b><p>${{ github.event.review.user.login }} has commented on the PR:   ${{ github.event.pull_request.html_url }}</p>"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+          TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+          GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
+          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
 
   changes:
     if: github.event.review.state == 'changes_requested'
@@ -71,3 +77,6 @@ jobs:
           TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR changes requested!!</b><p>${{ github.event.review.user.login }} requested changes on the PR:  ${{ github.event.pull_request.html_url }}<p>"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+          TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+          GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
+          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
