@@ -15,7 +15,7 @@ async function sendTelegramNotification() {
     chat_id: chatId,
     text: message,
     message_thread_id: messageThreadId,
-    parse_mode: 'MarkdownV2',
+    parse_mode: 'Markdown',
   };
 
   try {
