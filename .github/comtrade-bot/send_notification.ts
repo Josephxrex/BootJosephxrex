@@ -18,10 +18,11 @@ function constructMessage() {
   let message = "";
   switch (action) {
    case "MERGE":
-      message = `<b>🤖${repo} PR Merged!</b>
-      
-  <b>Title:</b> ${commitMessage}
-  <b>Sync your branches!</b>`;
+      message = `
+<b>🤖${repo} PR Merged!</b>
+
+<b>Title:</b> ${commitMessage}
+<b>Sync your branches!</b>`;
       break;
     case "PR_READY":
       message = `
