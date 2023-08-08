@@ -25,9 +25,8 @@ async function sendTelegramNotification() {
       throw new Error(`Telegram API error: ${response.statusText}`);
     } 
   } catch (error) {
-    const err = error as Error;
     console.error(
-      `An error occurred while sending the Telegram message: ${err}`
+      `An error occurred while sending the Telegram message: ${error}`
     );
     throw err;
   }
