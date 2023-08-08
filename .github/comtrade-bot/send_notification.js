@@ -1,15 +1,6 @@
 const axios = require("axios");
 
-enum MappedActions {
-  MERGE = "MERGE",
-  PR_READY = "PR_READY",
-  APPROVED = "APPROVED",
-  COMMENTED = "COMMENTED",
-  CHANGES_REQUESTED = "CHANGES_REQUESTED",
-}
-
-
-// Repository secret
+// Repository's secrets
 const repo = process.env.REPOSITORY_NAME;
 const botToken = process.env.TELEGRAM_TOKEN;
 const chatId = process.env.TELEGRAM_TO;
@@ -26,34 +17,33 @@ const reviewUser = process.env.REVIEW_USER;
 function constructMessage() {
   let message = "";
   switch (action) {
-    case MappedActions.MERGE:
+    case "MERGE":
       message = `<b>🤖${repo} PR Merged!</b>
   <b>Title:</b> ${commitMessage}
   Sync your branches!`;
       break;
-    case MappedActions.PR_READY:
+    case "PR_READY":
       message = `<b>🤖${repo}Review Request</b>
         <b>PR Link:</b> ${prUrl}
         <b>PR Title:</b> ${prTitle}
         <b>PR Author:</b> ${prAuthor}
         <b>Requested Reviewers:</b>${requestedReviewers} `;
       break;
-    case MappedActions.APPROVED:
+    case "APPROVED":
       message = `<b>🤖${repo} PR approved</b>
     <b>${reviewUser}</b> has approved the PR: ${prUrl}`;
       break;
-    case MappedActions.COMMENTED:
+    case "COMMENTED":
       message = `<b>🤖${repo} PR commented!</b>
   <b>${reviewUser}</b> has commented on the PR: ${prUrl}`;
       break;
-    case MappedActions.CHANGES_REQUESTED:
+    case "CHANGES_REQUESTED":
       message = `<b>🤖${repo} PR changes requested!!</b>
     <b>${reviewUser}</b> requested changes on the PR:  ${prUrl}`;
       break;
     default:
       break;
   }
-
   return message;
 }
 
