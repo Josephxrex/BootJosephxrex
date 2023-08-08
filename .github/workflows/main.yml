@@ -3,7 +3,8 @@ name: PR TS
 on:
   pull_request:
     types:
-      - opened
+      - review_requested
+      - ready_for_review
 
 jobs:
   send_notification:
