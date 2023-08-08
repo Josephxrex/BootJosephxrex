@@ -26,6 +26,7 @@ jobs:
         env:
           TELEGRAM_MESSAGE: |
             **🤖Comtrade Backend PR approved**
+            
             **${{ github.event.review.user.login }}** has approved the PR:  ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
@@ -53,7 +54,8 @@ jobs:
         env:
           TELEGRAM_MESSAGE: |
             **🤖Comtrade Backend PR commented**
-            **${{ github.event.review.user.login }}** has commented on the PR:   ${{ github.event.pull_request.html_url }}</p>"
+            
+            **${{ github.event.review.user.login }}** has commented on the PR:   ${{ github.event.pull_request.html_url }}!"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
@@ -79,8 +81,9 @@ jobs:
         run: node send_notification.ts
         env:
           TELEGRAM_MESSAGE: |
-            **🤖Comtrade Backend PR changes requested
-            **${{ github.event.review.user.login }}** requested changes on the PR:  ${{ github.event.pull_request.html_url }}<p>"
+            **🤖Comtrade Backend PR changes requested!**
+            
+            **${{ github.event.review.user.login }}** requested changes on the PR:  ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
