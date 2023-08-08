@@ -18,33 +18,28 @@ function constructMessage() {
   let message = "";
   switch (action) {
     case "MERGE":
-      message = `<b>🤖${repo} PR Merged!</b>
-  <br>
+      message = `<b>🤖${repo} PR Merged!</b><br>
   <b>Title:</b> ${commitMessage}
-  <br>
+  
   <b>Sync your branches!</b>`;
       break;
     case "PR_READY":
-      message = `<b>🤖${repo}Review Request</b>
-  <br>
+      message = `<b>🤖${repo}Review Request</b><br>
   <b>PR Link:</b> ${prUrl}
   <b>PR Title:</b> ${prTitle}
   <b>PR Author:</b> ${prAuthor}
   <b>Requested Reviewers:</b>${requestedReviewers} `;
       break;
     case "APPROVED":
-      message = `<b>🤖${repo} PR approved</b>
-  <br>
+      message = `<b>🤖${repo} PR approved</b><br>
   <b>${reviewUser}</b> has approved the PR: ${prUrl}`;
       break;
     case "COMMENTED":
-      message = `<b>🤖${repo} PR commented!</b>
-  <br>
+      message = `<b>🤖${repo} PR commented!</b><br>
   <b>${reviewUser}</b> has commented on the PR: ${prUrl}`;
       break;
     case "CHANGES_REQUESTED":
-      message = `<b>🤖${repo} PR changes requested!!</b>
-  <br>
+      message = `<b>🤖${repo} PR changes requested!!</b><br>
   <b>${reviewUser}</b> requested changes on the PR:  ${prUrl}`;
       break;
     default:
