@@ -1,4 +1,4 @@
-name: PR TS
+name: PR Notification
 
 on:
   pull_request:
@@ -25,15 +25,12 @@ jobs:
       - name: Send Telegram Notification
         run: node .github/comtrade-bot/send_notification.ts
         env:
-          TELEGRAM_MESSAGE: |
-            **🤖Comtrade Backend Review Request🤖**
-            **PR Link:** ${{ github.event.pull_request.html_url }}
-            **PR Author:** ${{ github.event.pull_request.user.login}}
-            **PR Title:** ${{ github.event.pull_request.title}}
-            **Requested Reviewers:**${{github.event.requested_reviewer.login }}
-            **PR Link:** ${{ github.event.pull_request.html_url }}
+          ACTION: PR_READY
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          REQUESTED_REVIEWERS: ${{ github.event.requested_reviewer.login }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
-          GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
