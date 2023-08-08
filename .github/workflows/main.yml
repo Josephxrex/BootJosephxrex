@@ -1,4 +1,4 @@
-name: PR REVIEW
+name: Telegram PR Notification
 
 on:
   pull_request:
@@ -22,9 +22,10 @@ jobs:
         run: npm install axios
 
       - name: Send Telegram Notification
-        run: node send_notification.ts
+        run: |
+          node send_notification.ts
         env:
-          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend Review Request!!🤖</b><br><b>PR Link:</b> ${{ github.event.pull_request.html_url }}"
+          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend Review Request!!🤖</b>%0A<b>PR Link:</b> ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
