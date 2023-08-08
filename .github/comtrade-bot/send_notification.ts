@@ -47,7 +47,7 @@ function constructMessage() {
       break;
     case "CHANGES":
       message = `
-<b>🤖${repo} PR changes requested!!</b><br>
+<b>🤖${repo} PR changes requested!!</b>
 
 <b>${reviewUser}</b> requested changes on the PR:  ${prUrl}`;
       break;
