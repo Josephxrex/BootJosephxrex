@@ -5,9 +5,6 @@ on:
   push:
     branches:
       - main
-  pull_request: 
-     types:
-     - review_requested
 jobs:
   notify-merge:
     runs-on: ubuntu-latest
@@ -28,7 +25,7 @@ jobs:
         env:
           TELEGRAM_MESSAGE: | 
             **🤖Comtrade Backend PR Merged!**
-            **Title:** ${{github.event.pull_request.title}}
+            **Title:** ${{github.event.pull_request.message}}
             **Sync your branches!**
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
