@@ -20,7 +20,7 @@ jobs:
         run: npm install axios
 
       - name: Send Telegram Notification
-        run: node BootJosephxrex/.github/comtrade-bot/send_notification.ts
+        run: node .github/comtrade-bot/send_notification.ts
         env:
           TELEGRAM_MESSAGE: | 
             **🤖Comtrade Backend PR Merged!**
