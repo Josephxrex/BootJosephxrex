@@ -25,7 +25,7 @@ jobs:
         run: node .github/comtrade-bot/send_notification.ts
         env:
           TELEGRAM_MESSAGE:  | 
-            "**🤖Comtrade Backend PR approved**
+            **🤖Comtrade Backend PR approved**
             **${{ github.event.review.user.login }}** has approved the PR:  ${{ github.event.pull_request.html_url }}"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
