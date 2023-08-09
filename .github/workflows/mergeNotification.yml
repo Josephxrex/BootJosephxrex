@@ -20,7 +20,7 @@ jobs:
       - name: Install Dependencies
         run: npm install axios
 
-      - name: Send Telegram Notification
+      - name: Send Telegram Notification on PR merged
         run: node .github/comtrade-bot/send_notification.ts
         env:
           ACTION: MERGE
