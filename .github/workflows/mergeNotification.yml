@@ -21,7 +21,7 @@ jobs:
         run: npm install axios
 
       - name: Send Telegram Notification on PR merged
-        run: ts-node .github/comtrade-bot/send_notification.ts
+        run: node .github/comtrade-bot/send_notification.ts
         env:
           ACTION: MERGE
           COMMIT_MESSAGE: ${{github.event.head_commit.message}}
