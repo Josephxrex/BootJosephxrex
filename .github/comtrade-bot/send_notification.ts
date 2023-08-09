@@ -38,13 +38,14 @@ function constructMessage() {
     case "APPROVED":
       message = `
 <b>🤖${repo} PR approved!</b>
+<b>PR Title:</b> ${prTitle}
 
 <b>${reviewUser}</b> has approved the PR: ${prUrl}`;
       break;
     case "COMMENTED":
       message = `
-<b>PR Title:</b> ${prTitle}
 <b>🤖${repo} PR commented!</b>
+<b>PR Title:</b> ${prTitle}
 
 <b>${reviewUser}</b> has commented on the PR: ${prUrl}`;
       break;
