@@ -57,7 +57,7 @@ function constructMessage() {
 <b>${reviewUser}</b> requested changes on the PR:  ${prUrl}`;
       break;
     default:
-      break;
+      throw new Error(`Unsupported action: ${action}`);
   }
   return message;
 }
@@ -74,14 +74,19 @@ async function sendTelegramNotification() {
   };
 
   try {
-    const response = await axios.post(url, payload);
-    if (response.status !== 200) {
-      throw new Error(`Telegram API error: ${response.statusText}`);
-    }
+    await axios.post(url, payload);
   } catch (error) {
-    console.error(
-      `An error occurred while sending the Telegram message: ${error}`
-    );
+    if (error.response) {
+      const responseStatus = error.response.status;
+      const responseMessage = error.response.data;
+      console.error(
+        `Telegram API responded with an error (${responseStatus}): ${responseMessage}`
+      );
+    } else {
+      console.error(
+        `An error occurred while sending the Telegram message: ${error}`
+      );
+    }
     throw error;
   }
 }
