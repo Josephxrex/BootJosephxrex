@@ -76,18 +76,19 @@ async function sendTelegramNotification() {
   try {
     await axios.post(url, payload);
   } catch (error) {
-    if (error.response) {
-      const responseStatus = error.response.status;
-      const responseMessage = error.response.data;
-      console.error(
-        `Telegram API responded with an error (${responseStatus}): ${responseMessage}`
-      );
+    const { response } = error;
+    process.exit(1);
+    if (response) {
+      const errorDetails = JSON.stringify(response.data, null, 2);
+      console.error(`HTTP Error: Status ${response.status}\n${errorDetails}`);
+     
+      throw error;
     } else {
-      console.error(
-        `An error occurred while sending the Telegram message: ${error}`
-      );
+      const errorDetails = JSON.stringify(error, null, 2);
+      console.error(`General Error: ${errorDetails}`);
+      throw error;
     }
-    throw error;
+ 
   }
 }
 
