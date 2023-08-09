@@ -1,23 +1,25 @@
 const axios = require("axios");
 
-// Repository's secrets
-const repo = process.env.REPOSITORY_NAME;
-const botToken = process.env.TELEGRAM_TOKEN;
-const chatId = process.env.TELEGRAM_TO;
-const messageThreadId = process.env.TELEGRAM_THREAD_ID;
-// Set the environment variables
-const action = process.env.ACTION;
-const commitMessage = process.env.COMMIT_MESSAGE;
-const prUrl = process.env.PR_URL;
-const prTitle = process.env.PR_TITLE;
-const prAuthor = process.env.PR_AUTHOR;
-const requestedReviewers = process.env.REQUESTED_REVIEWERS;
-const reviewUser = process.env.REVIEW_USER;
+const {
+  // Repository's secrets
+  REPOSITORY_NAME: repo,
+  TELEGRAM_TOKEN: botToken,
+  TELEGRAM_TO: chatId,
+  TELEGRAM_THREAD_ID: messageThreadId,
+  // Set the environment variables
+  ACTION: action,
+  COMMIT_MESSAGE: commitMessage,
+  PR_URL: prUrl,
+  PR_TITLE: prTitle,
+  PR_AUTHOR: prAuthor,
+  REQUESTED_REVIEWERS: requestedReviewers,
+  REVIEW_USER: reviewUser,
+} = process.env;
 
 function constructMessage() {
   let message = "";
   switch (action) {
-   case "MERGE":
+    case "MERGE":
       message = `
 <b>🤖${repo} PR Merged!</b>
 
@@ -35,20 +37,21 @@ function constructMessage() {
       break;
     case "APPROVED":
       message = `
-<b>🤖${repo} PR approved</b>
+<b>🤖${repo} PR approved!</b>
 
 <b>${reviewUser}</b> has approved the PR: ${prUrl}`;
       break;
     case "COMMENTED":
       message = `
+<b>PR Title:</b> ${prTitle}
 <b>🤖${repo} PR commented!</b>
 
 <b>${reviewUser}</b> has commented on the PR: ${prUrl}`;
       break;
     case "CHANGES":
       message = `
-<b>🤖${repo} PR changes requested!!</b>
-
+<b>🤖${repo} PR changes requested!</b>
+<b>PR Title:</b> ${prTitle}
 <b>${reviewUser}</b> requested changes on the PR:  ${prUrl}`;
       break;
     default:
