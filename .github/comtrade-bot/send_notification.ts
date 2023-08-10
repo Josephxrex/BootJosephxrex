@@ -77,15 +77,16 @@ async function sendTelegramNotification() {
     await axios.post(url, payload);
   } catch (error) {
     const { response } = error;
-    process.exit(1);
+    
     if (response) {
       const errorDetails = JSON.stringify(response.data, null, 2);
       console.error(`HTTP Error: Status ${response.status}\n${errorDetails}`);
-     
+      process.exit(1);
       throw error;
     } else {
       const errorDetails = JSON.stringify(error, null, 2);
       console.error(`General Error: ${errorDetails}`);
+      process.exit(1);
       throw error;
     }
  
