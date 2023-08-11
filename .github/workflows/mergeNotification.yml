@@ -20,7 +20,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install axios
-          npm install -g ts-node
+          npm npm install -g typescript@latest
 
       - name: Send Telegram Notification
         run: npx ts-node .github/comtrade-bot/send_notification.ts
