@@ -21,10 +21,10 @@ jobs:
         run: |
           npm install axios
           npm install typescript@latest
+          npm install @types/node @types/node
 
       - name: Send Telegram Notification
         run: |
-          npm install --save-dev @types/node @types/node
           npm ts-node .github/comtrade-bot/send_notification.ts
           
         env:
