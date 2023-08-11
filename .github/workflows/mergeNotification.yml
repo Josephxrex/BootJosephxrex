@@ -24,8 +24,7 @@ jobs:
           npm install @types/node @types/node
 
       - name: Send Telegram Notification
-        run: |
-          npx ts-node .github/comtrade-bot/send_notification.ts
+        run: npx ts-node .github/comtrade-bot/send_notification.ts
           
         env:
           ACTION: MERGE
