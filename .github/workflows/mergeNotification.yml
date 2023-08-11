@@ -18,7 +18,9 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm install axios && npm install -g ts-node
+        run: |
+          npm install axios
+          npm install -g ts-node
 
       - name: Send Telegram Notification
         run: npx ts-node .github/comtrade-bot/send_notification.ts
