@@ -20,10 +20,10 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm install axios
+        run: npm install axios && npm install -g ts-node
 
       - name: Send Telegram Notification
-        run: node .github/comtrade-bot/send_notification.ts
+        run: ts-node .github/comtrade-bot/send_notification.ts
         env:
           ACTION: PR_READY
           PR_URL: ${{ github.event.pull_request.html_url }}
