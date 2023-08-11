@@ -18,10 +18,10 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm install axios
+        run: npm install axios && npm install -g ts-node
 
-      - name: Send Telegram Notification on PR merged
-        run: node .github/comtrade-bot/send_notification.ts
+      - name: Send Telegram Notification
+        run: ts-node .github/comtrade-bot/send_notification.ts
         env:
           ACTION: MERGE
           COMMIT_MESSAGE: ${{github.event.head_commit.message}}
