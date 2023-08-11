@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 
 const {
   // Repository's secrets
@@ -17,16 +17,16 @@ const {
 } = process.env;
 
 function constructMessage() {
-  let message = "";
+  let message = '';
   switch (action) {
-    case "MERGE":
+    case 'MERGE':
       message = `
 <b>🤖${repo} PR Merged!</b>
 
 <b>Title:</b> ${commitMessage}
 <b>Sync your branches!</b>`;
       break;
-    case "PR_READY":
+    case 'PR_READY':
       message = `
 <b>🤖${repo} Review Request</b>
 
@@ -35,21 +35,21 @@ function constructMessage() {
 <b>PR Author:</b> ${prAuthor}
 <b>Requested Reviewers:</b>${requestedReviewers} `;
       break;
-    case "APPROVED":
+    case 'APPROVED':
       message = `
 <b>🤖${repo} PR approved!</b>
 
 <b>PR Title:</b> ${prTitle}
 <b>${reviewUser}</b> has approved the PR: ${prUrl}`;
       break;
-    case "COMMENTED":
+    case 'COMMENTED':
       message = `
 <b>🤖${repo} PR commented!</b>
 
 <b>PR Title:</b> ${prTitle}
 <b>${reviewUser}</b> has commented on the PR: ${prUrl}`;
       break;
-    case "CHANGES":
+    case 'CHANGES':
       message = `
 <b>🤖${repo} PR changes requested!</b>
 
@@ -70,26 +70,23 @@ async function sendTelegramNotification() {
     chat_id: chatId,
     text: message,
     message_thread_id: messageThreadId,
-    parse_mode: "HTML",
+    parse_mode: 'HTML',
   };
 
   try {
     await axios.post(url, payload);
   } catch (error) {
     const { response } = error;
-    
+
     if (response) {
       const errorDetails = JSON.stringify(response.data, null, 2);
       console.error(`HTTP Error: Status ${response.status}\n${errorDetails}`);
       process.exit(1);
-      throw error;
     } else {
       const errorDetails = JSON.stringify(error, null, 2);
       console.error(`General Error: ${errorDetails}`);
       process.exit(1);
-      throw error;
     }
- 
   }
 }
 
