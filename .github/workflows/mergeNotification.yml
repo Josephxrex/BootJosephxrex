@@ -23,7 +23,10 @@ jobs:
           npm install typescript@latest
 
       - name: Send Telegram Notification
-        run: npx ts-node .github/comtrade-bot/send_notification.ts
+        run: |
+          npm install --save-dev @types/node @types/node
+          npm ts-node .github/comtrade-bot/send_notification.ts
+          
         env:
           ACTION: MERGE
           COMMIT_MESSAGE: ${{github.event.head_commit.message}}
