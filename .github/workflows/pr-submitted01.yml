@@ -9,6 +9,9 @@ jobs:
   approved:
     if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .github/comtrade-bot
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -19,21 +22,26 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm install axios
+        run: npm install
 
-      - name: Send Telegram Notification
-        run: node send_notification.ts
+      - name: Send Telegram Notification on PR merged
+        run: npm start
         env:
-          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR approved</b>${{ github.event.review.user.login }} has approved the PR:  ${{ github.event.pull_request.html_url }}"
+          ACTION: APPROVED
+          REVIEW_USER: ${{ github.event.review.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
-          GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
 
   commented:
     if: github.event.review.state == 'commented'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .github/comtrade-bot
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -44,21 +52,26 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm install axios
+        run: npm install
 
-      - name: Send Telegram notification on PR review commented
-        run: node send_notification.ts
+      - name: Send Telegram Notification on PR merged
+        run: npm start
         env:
-          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR commented!</b><p>${{ github.event.review.user.login }} has commented on the PR:   ${{ github.event.pull_request.html_url }}</p>"
+          ACTION: COMMENTED
+          REVIEW_USER: ${{ github.event.review.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
-          GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
 
   changes:
     if: github.event.review.state == 'changes_requested'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .github/comtrade-bot
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -69,14 +82,16 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm install axios
+        run: npm install
 
-      - name: Send Telegram notification on PR review changes requested
-        run: node send_notification.ts
+      - name: Send Telegram Notification on PR merged
+        run: npm start
         env:
-          TELEGRAM_MESSAGE: "<b>🤖Comtrade Backend PR changes requested!!</b><p>${{ github.event.review.user.login }} requested changes on the PR:  ${{ github.event.pull_request.html_url }}<p>"
+          ACTION: CHANGES
+          REVIEW_USER: ${{ github.event.review.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
-          GITHUB_SERVER_URL: ${{ secrets.GITHUB_SERVER_URL }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}

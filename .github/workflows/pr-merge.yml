@@ -1,0 +1,34 @@
+name: Merge Notification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  notify-merge:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .github/comtrade-bot
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Send Telegram Notification on PR merged
+        run: npm start
+        env:
+          ACTION: MERGE
+          COMMIT_MESSAGE: ${{github.event.head_commit.message}}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+          TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+          REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}

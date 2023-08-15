@@ -1,0 +1,38 @@
+name: PR Notification
+
+on:
+  pull_request:
+    types:
+      - review_requested
+      - ready_for_review
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .github/comtrade-bot
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Send Telegram Notification on PR merged
+        run: npm start
+        env:
+          ACTION: PR_READY
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          REQUESTED_REVIEWERS: ${{ github.event.requested_reviewer.login }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+          TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+          REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
